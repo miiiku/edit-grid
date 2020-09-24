@@ -1,2 +1,7 @@
 # edit-grid
-可视化编辑布局
+
+一个简易的在线可视化编辑图片布局方案
+
+![image1](./images/image1.png)
+
+![image2](./images/image2.png)
