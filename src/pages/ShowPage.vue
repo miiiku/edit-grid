@@ -2,7 +2,7 @@
   <div class="show-page">
     <div class="grid-container" :style="gridStyle" v-if="images.length">
       <div class="grid-item" v-for="item in images" :key="item.key" :style="imageStyle(item.area)">
-        <img :src="item.url + '@compress460'" :alt="item.name" :srcset="srcset(item.url)" :sizes="sizes">
+        <img :src="item.url + '@compress680'" :alt="item.name" :srcset="srcset(item.url)" :sizes="sizes">
       </div>
     </div>
   </div>
@@ -23,9 +23,9 @@ export default {
   },
   computed: {
     imageHeight() {
-      if (!this.gridRow) return 0
-      let innerWidth = window.innerWidth - (10 * (this.gridRow + 1))
-      let itemWidth = parseFloat(innerWidth / this.gridRow).toFixed(4)
+      if (!this.gridCol) return 0
+      let innerWidth = window.innerWidth - (10 * (this.gridCol + 1))
+      let itemWidth = parseFloat(innerWidth / this.gridCol).toFixed(4)
       return parseFloat(itemWidth / this.ratio).toFixed(4)
     },
     gridStyle() {
@@ -41,17 +41,17 @@ export default {
     },
     sizes() {
       return `
-        (max-width: 768px) 180px,
-        (max-width: 1200px) 240px,
-        460px
+        (max-width: 768px) 240px,
+        (max-width: 1200px) 460px,
+        680px
       `
     },
     srcset() {
       return function (url) {
         return `
-          ${url}@compress180 180w,
           ${url}@compress240 240w,
-          ${url}@compress460 460w
+          ${url}@compress460 460w,
+          ${url}@compress680 680w
         `
       }
     },

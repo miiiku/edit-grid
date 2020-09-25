@@ -40,6 +40,11 @@ export default {
       type: Array,
       required: true,
       default: () => []
+    },
+    isEdit: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   },
   data() {
@@ -78,6 +83,7 @@ export default {
     },
     handleSub() {
       if (!this.selected) return;
+      if (this.isEdit) return alert("区域模块正处于编辑状态中，不能设置区域");
       if (!this.areas.includes(this.area)) return alert("无效区域");
       if (this.usedAreas.includes(this.area)) return alert("该区域已被使用");
       this.selected.area = this.area;

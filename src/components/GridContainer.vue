@@ -31,6 +31,11 @@
 export default {
   name: "GridContainer",
   props: {
+    isEdit: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
     usedAreas: {
       type: Array,
       required: true,
@@ -40,7 +45,6 @@ export default {
   data() {
     return {
       isInit: false,
-      isEdit: false,
       editArea: null,
       copyArea: null,
       lastEditArea: null,
@@ -109,9 +113,9 @@ export default {
     handleEdit(area) {
       if (this.isEdit) return;
       if (this.usedAreas.includes(area.area)) return alert("已被使用的区域不能在被编辑");
-      this.isEdit = true;
       this.editArea = area;
       this.copyArea = JSON.parse(JSON.stringify(this.areas));
+      this.$emit('updateEdit', true);
     },
     handleSelect(index) {
       if (!this.isEdit) return;
@@ -150,17 +154,17 @@ export default {
       if (!matrix) {
         this.handleCancel();
       } else {
-        this.isEdit = false;
         this.editArea = null;
         this.copyArea = null;
         this.updateAreas();
+        this.$emit('updateEdit', false);
       }
     },
     handleCancel() {
       this.areas = this.copyArea;
-      this.isEdit = false;
       this.editArea = null;
       this.copyArea = null;
+      this.$emit('updateEdit', false);
     },
     handleRename() {
       let newName = window.prompt("请输入新的区域名称:");

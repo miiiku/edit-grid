@@ -3,8 +3,23 @@
     <HelloWorld/>
     <button class="config-btn" @click="sendConfig">Send Config</button>
     <div class="container">
-      <GridContainer ref="grid" class="grid-container-box" :usedAreas="usedAreas" @update="handleUpdateAreas"/>
-      <EditContainer ref="edit" class="edit-container-box" :areas="areas" :usedAreas="usedAreas" @update="handelUpdateUsedAreas"/>
+      <GridContainer
+        ref="grid"
+        class="grid-container-box"
+        :usedAreas="usedAreas"
+        :isEdit="isEdit"
+        @updateEdit="handleUpdateEditStatus"
+        @update="handleUpdateAreas"
+      />
+
+      <EditContainer
+        ref="edit"
+        class="edit-container-box"
+        :areas="areas"
+        :usedAreas="usedAreas"
+        :isEdit="isEdit"
+        @update="handelUpdateUsedAreas"
+      />
     </div>
   </div>
 </template>
@@ -24,10 +39,15 @@ export default {
   data() {
     return {
       areas: [],
-      usedAreas: []
+      usedAreas: [],
+      isEdit: false,
     };
   },
   methods: {
+    handleUpdateEditStatus(state) {
+      console.log(state)
+      this.isEdit = state
+    },
     handleUpdateAreas(data) {
       this.areas = data;
     },
