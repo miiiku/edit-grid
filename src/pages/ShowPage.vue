@@ -86,7 +86,7 @@ export default {
         this.areas    = data.areas
         this.title    = data.title
       }
-      ajax.open('GET', 'https://qiniu.miiiku.xyz/works/demo.json?t=' + Date.now())
+      ajax.open('GET', 'https://qiniu.sukoshi.xyz/works/demo.json?t=' + Date.now())
       ajax.send()
     }
   }
